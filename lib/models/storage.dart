@@ -42,11 +42,11 @@ class Storage {
 
   Future<List> connection() async {
     // setting up db connection
-    const Path_User = 'lib/src/db/database.db';
-    const Path_Server = 'lib/src/db/server.db';
-    const Path_Channel = 'lib/src/db/channel.db';
-    const Path_Message = 'lib/src/db/message.db';
-    const Path_Personal_Dm = 'lib/src/db/personal_dm.db';
+    const Path_User = 'lib/database/database.db';
+    const Path_Server = 'lib/database/server.db';
+    const Path_Channel = 'lib/database/channel.db';
+    const Path_Message = 'lib/database/message.db';
+    const Path_Personal_Dm = 'lib/database/dm.db';
 
     // const dbPath1 = 'lib/src/db/c_user.db';
     final DatabaseFactory db_factory = databaseFactoryIo;
