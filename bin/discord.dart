@@ -30,6 +30,12 @@ void main() async {
       await fun.register(db1, userStore, new_user);
       break;
 
+      case "login":
+      await fun.login(db1, userStore, new_user);
+
+      case "logout":
+      await fun.logout(new_user);
+
       case "exit" :
       flag=false;
 
