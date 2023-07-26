@@ -60,14 +60,19 @@ class Admin extends Exception {
       }
     }
     stdout.write("Password -> ");
+    stdin.echoMode=false;
     var pass = stdin.readLineSync() as String;
     print('');
+    stdin.echoMode=true;
     stdout.write("Confirm Password :");
+    stdin.echoMode=false;
     var confirm=stdin.readLineSync() as String;
+    stdin.echoMode=true;
     print('');
 
     if(pass!=confirm){
       print("try again password doesnt matched!!");
+      return;
     }
     else{
       pass=hashPwd(pass);
