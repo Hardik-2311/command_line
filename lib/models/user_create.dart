@@ -60,35 +60,83 @@ class Admin extends Exception {
       }
     }
     stdout.write("Password -> ");
-    stdin.echoMode=false;
+    stdin.echoMode = false;
     var pass = stdin.readLineSync() as String;
     print('');
-    stdin.echoMode=true;
+    stdin.echoMode = true;
     stdout.write("Confirm Password :");
-    stdin.echoMode=false;
-    var confirm=stdin.readLineSync() as String;
-    stdin.echoMode=true;
+    stdin.echoMode = false;
+    var confirm = stdin.readLineSync() as String;
+    stdin.echoMode = true;
     print('');
 
-    if(pass!=confirm){
+    if (pass != confirm) {
       print("try again password doesnt matched!!");
       return;
+    } else {
+      pass = hashPwd(pass);
     }
-    else{
-      pass=hashPwd(pass);
-    }
-
-
 
     //objects of the class
 
-    Admin newUser=Admin(username, pass);
+    Admin newUser = Admin(username, pass);
 
     await userStore.record(newUser.username).put(db1, newUser.password);
 
-    user1.username=username;
-    user1.password=pass;
+    user1.username = username;
+    user1.password = pass;
 
     print("user registered successfully");
+  }
+
+  //login function
+  Future<void> login(
+      Database db1, StoreRef<String, String> userStore, User user1) async {
+    stdout.write("Username: ");
+    final username = stdin.readLineSync();
+    if (username == null) {
+      return;
+    }
+
+    var check = super.registered(username, db1, userStore, user1);
+    if (!(await check)) {
+      print("user not registered resgister first");
+    }
+
+    var db_pass = userStore.record(username).get(db1);
+
+    if (db_pass == 'null') {
+      return;
+    }
+    stdout.write("Password :");
+    stdin.echoMode = false;
+    final pass = stdin.readLineSync() ;
+    stdin.echoMode = true;
+    print('');
+    if (pass == null) {
+      return;
+    }
+    else if(comparePwd(pass,db_pass as String)){
+      user1.username = username;
+      user1.password = pass;
+
+      print("logged in");
+    }
+    else{
+      print("password doesnt matched");
+      return;
+    }
+  }
+
+   logout(User user1){
+    if(user1.username=="0"){
+      return;
+    }
+    else{
+       user1.username="0";
+       user1.password="0";
+       print("logout successfully");
+       return;
+    }
   }
 }
