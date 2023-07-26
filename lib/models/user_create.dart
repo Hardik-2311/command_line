@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:sembast/sembast.dart';
 import 'package:crypt/crypt.dart';
-
 import 'package:discord/exceptions/exceptions.dart';
 
 //create a user
@@ -98,45 +97,51 @@ class Admin extends Exception {
       return;
     }
 
-    var check = super.registered(username, db1, userStore, user1);
-    if (!(await check)) {
+    if (!(await super.registered(username, db1, userStore, user1))) {
       print("user not registered resgister first");
+      return;
     }
 
-    var db_pass = userStore.record(username).get(db1);
+    var databasePass = await userStore.record(username).get(db1);
 
-    if (db_pass == 'null') {
+    if (databasePass == 'null') {
       return;
     }
     stdout.write("Password :");
     stdin.echoMode = false;
-    final pass = stdin.readLineSync() ;
+    final pass = stdin.readLineSync();
     stdin.echoMode = true;
     print('');
     if (pass == null) {
       return;
-    }
-    else if(comparePwd(pass,db_pass as String)){
+    } else if (comparePwd(pass, databasePass!)) {
       user1.username = username;
       user1.password = pass;
 
       print("logged in");
-    }
-    else{
+    } else {
       print("password doesnt matched");
       return;
     }
   }
 
-   logout(User user1){
-    if(user1.username=="0"){
+  logout(User user1) {
+    if (user1.username == "0") {
+      return;
+    } else {
+      user1.username = "0";
+      user1.password = "0";
+      print("logout successfully");
       return;
     }
-    else{
-       user1.username="0";
-       user1.password="0";
-       print("logout successfully");
-       return;
-    }
+  }
+
+  deleteData(
+      Database db1, StoreRef<String, String> userStore, User user1) async {
+    stdout.write("Username: ");
+    final username = stdin.readLineSync() as String;
+    await userStore.record(username).delete(db1);
+    print("user data deleted");
+    return;
   }
 }

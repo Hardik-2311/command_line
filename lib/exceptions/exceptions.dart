@@ -28,4 +28,12 @@ class Exception {
      }
 
   }
+  //user logged in
+  Future<bool> user_logged_in(User user1) async {
+    if (user1.username == "0") {
+      print("No user");
+      return true;
+    }
+    return false;
+  }
 }
