@@ -2,4 +2,8 @@
 # Created by `dart pub`
 .dart_tool/
 database
-database.db
+lib/database/database.db
+lib/database/channel.db
+lib/database/dm.db
+lib/database/message.db
+lib/database/server.db

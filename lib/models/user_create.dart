@@ -141,7 +141,13 @@ class Admin extends Exception {
     stdout.write("Username: ");
     final username = stdin.readLineSync() as String;
     await userStore.record(username).delete(db1);
-    print("user data deleted");
-    return;
+
+    if (await username == " ") {
+      print(" not a valid usesname ");
+      return;
+    } else {
+      print("user data deleted");
+      return;
+    }
   }
 }
