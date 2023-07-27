@@ -39,7 +39,6 @@ class Server extends Exception {
       List<Map> role_list = [user_role];
       Map<String, dynamic> s_map = {
         'channellist': [],
-        'categorylist': [],
         'mememberlist': role_list,
         'modPassword': Admin.hashPwd(modPassword),
       };
@@ -77,7 +76,7 @@ class Server extends Exception {
         case 'mod':
           stdout.write("Enter password for mod access: ");
           String s_pass = stdin.readLineSync() as String;
-          if (Admin.comparePwd(s_pass, roleList['s_pwd'])) {
+          if (Admin.comparePwd(s_pass, roleList['modPassword'])) {
             user_role = ServerType.mod;
             break;
           } else {
