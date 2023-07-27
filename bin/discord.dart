@@ -52,10 +52,11 @@ void main() async {
 
 
 
-    // await db1.close();
+    
     // await db2.close();
     // await db3.close();
     // await db4.close();
     // await db5.close();
   }
+  await db1.close();
 }
