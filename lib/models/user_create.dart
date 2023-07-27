@@ -8,20 +8,7 @@ class User {
   String username;
   String password;
   //constructor
-
   User(this.username, this.password);
-
-  //function for
-  //username is nil
-
-  printUser(User user1) {
-    if (user1.username == "0") {
-      print("there is no user at this moment");
-      return;
-    } else {
-      print(username);
-    }
-  }
 }
 
 class Admin extends Exception {

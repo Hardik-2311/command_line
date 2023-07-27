@@ -1,1 +1,4 @@
 {"version":1,"sembast":1}
+{"key":"s1","value":{"channellist":[],"categorylist":[],"mememberlist":[{"name":"h","role":"admin"}],"modPassword":"$5$rounds=1000$P7xdp8xQ3vETIUyQ$1N5JIC45bRyRN2RbpHimf/soyIkk8n4VCaJ6UvAVCQ/"}}
+{"key":"s1","deleted":true}
+{"key":"s1","value":{"channellist":[],"categorylist":[],"mememberlist":[{"name":"h","role":"admin"},{"name":"a","role":"newbie"}],"modPassword":"$5$rounds=1000$P7xdp8xQ3vETIUyQ$1N5JIC45bRyRN2RbpHimf/soyIkk8n4VCaJ6UvAVCQ/"}}

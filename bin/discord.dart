@@ -4,10 +4,12 @@ import 'dart:io';
 import 'package:sembast/sembast.dart';
 import 'package:discord/models/storage.dart';
 import 'package:discord/models/user_create.dart';
+import 'package:discord/models/server.dart';
 void main() async {
   var storage = Storage.constructor1();
   User new_user = User("0", "0");
   var fun = Admin.fun();
+  var server=Server();
 
   List<dynamic> myList = await storage.connection();
   Database db1 = myList[0];
@@ -39,6 +41,14 @@ void main() async {
 
       case "delete":
         await fun.deleteData(db1, userStore, new_user);
+
+      case "createserver":
+      await server.createServer(db2, server_store, new_user, server_record);
+
+      case "joinserver":
+              await server.joinSerever(
+                  db2, server_store, new_user, server_record);
+              break;
 
       case "exit":
         flag = false;

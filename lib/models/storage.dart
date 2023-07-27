@@ -47,8 +47,6 @@ class Storage {
     const Path_Channel = 'lib/database/channel.db';
     const Path_Message = 'lib/database/message.db';
     const Path_Personal_Dm = 'lib/database/dm.db';
-
-    // const dbPath1 = 'lib/src/db/c_user.db';
     final DatabaseFactory db_factory = databaseFactoryIo;
 
     Database db1 = await db_factory.openDatabase(Path_User);

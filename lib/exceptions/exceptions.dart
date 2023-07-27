@@ -30,7 +30,7 @@ class Exception {
   //user logged in
   Future<bool> logged_in(User user1) async {
     if (user1.username == "0") {
-      print("No user");
+      print("Login First");
       return true;
     }
     return false;
@@ -51,11 +51,11 @@ class Exception {
   }
 
   Future<bool> no_any_server_exist(
-      String s_name, Database db2, StoreRef<String, Map> server_store) async {
+    String servername, Database db2, StoreRef<String, Map> server_store) async {
     bool flag = false;
     var server_record = await server_store.find(db2);
     for (var rec in server_record) {
-      if (rec.key == s_name) {
+      if (rec.key == servername) {
         flag = true;
       }
     }
@@ -64,26 +64,5 @@ class Exception {
       return true;
     }
     return false;
-  }
-
-  Future<bool> user_in_server(String s_name, Database db2,
-      StoreRef<String, Map> server_store, User user1) async {
-    var s_record = await server_store.find(db2);
-    bool user_in_server = false;
-    for (var rec in s_record) {
-      if (rec.key == s_name) {
-        for (var user in rec.value['mem_list']) {
-          if (user['name'] == user1.username) {
-            user_in_server = true;
-          }
-        }
-      }
-    }
-    if (!user_in_server) {
-      print("is not in this server");
-      return false;
-    }
-    return true;
-    //user is in server
   }
 }
