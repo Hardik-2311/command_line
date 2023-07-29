@@ -14,7 +14,7 @@ void main() async {
   var fun = Admin.fun();
   var server = Server();
   var channel = Channel();
-  var message1=message();
+  var message1 = message();
 
   List<dynamic> myList = await storage.connection();
   Database db1 = myList[0];
@@ -25,14 +25,12 @@ void main() async {
   StoreRef<String, String> userStore = myList[5];
   StoreRef<String, Map> server_store = myList[6];
   StoreRef<String, Map> channel_store = myList[7];
-  StoreRef<Map, Map> message_store= myList[8];
-  StoreRef<Map,String> p_dm_store=myList[9];
+  StoreRef<Map, Map> message_store = myList[8];
+  StoreRef<Map, String> p_dm_store = myList[9];
 
- 
   var server_record = myList[11];
   var channel_record = myList[12];
-  var message_record=myList[13];
-
+  var message_record = myList[13];
 
   bool flag = true;
 
@@ -66,17 +64,21 @@ void main() async {
         break;
 
       case "createChannel":
-        await channel.create_channel(db2, db3, channel_store, server_store, new_user, channel_record, server_record);
+        await channel.create_channel(db2, db3, channel_store, server_store,
+            new_user, channel_record, server_record);
         break;
 
       case "sendmessagetochannel":
-      await message1.channel_msg(db2, db3, db4, server_store, channel_store, message_store, new_user);
-      break;
+        await message1.channel_msg(db2, db3, db4, server_store, channel_store,
+            message_store, new_user);
+        break;
 
       case "sendDm":
-      await message1.personalDm(db5, db1, p_dm_store, userStore, new_user);
-      break;
-
+        await message1.personalDm(db5, db1, p_dm_store, userStore, new_user);
+        break;
+      case "readDm":
+        await message1.readMessage(db5, p_dm_store, new_user);
+        break;
       case "exit":
         flag = false;
 
@@ -87,6 +89,6 @@ void main() async {
   await db1.close();
   await db2.close();
   await db3.close();
-  // await db4.close();
-  // await db5.close();
+  await db4.close();
+  await db5.close();
 }

@@ -74,4 +74,21 @@ class message extends Exception {
       }
     }
   }
+
+  readMessage(
+      Database db5, StoreRef<Map, String> p_dm_store, User user1) async {
+    if (await super.logged_in(user1)) {
+      return;
+    } else {
+      print("Theres some messages for you.");
+      var record = await p_dm_store.find(db5);
+      var a = 0;
+      for (var rec in record) {
+        if (rec.key['receiver'] == user1.username) {
+          print("${rec.key['sender']}: ${rec.value} ");
+          a++;
+        }
+      }
+    }
+  }
 }
