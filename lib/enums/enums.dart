@@ -1,4 +1,4 @@
 import 'dart:core';
-enum Channel{text,voice, announcements,hackathons}
+enum ChannelType{text,voice, announcements,hackathons}
 
 enum ServerType{admin,mod,newbie}

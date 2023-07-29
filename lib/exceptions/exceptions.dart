@@ -50,8 +50,28 @@ class Exception {
     return false;
   }
 
-  Future<bool> no_any_server_exist(
-    String servername, Database db2, StoreRef<String, Map> server_store) async {
+  Future<bool> user_in_server(String servername, Database db2,
+      StoreRef<String, Map> server_store, User user1) async {
+    var serverrecord = await server_store.find(db2);
+    bool user_in_server = false;
+    for (var rec in serverrecord) {
+      if (rec.key == servername) {
+        for (var user in rec.value['memberlist']) {
+          if (user['name'] == user1.username) {
+            user_in_server = true;
+          }
+        }
+      }
+    }
+    if (!user_in_server) {
+      print("user is not in this server");
+      return false;
+    }
+    return true;
+  }
+
+  Future<bool> no_any_server_exist(String servername, Database db2,
+      StoreRef<String, Map> server_store) async {
     bool flag = false;
     var server_record = await server_store.find(db2);
     for (var rec in server_record) {
@@ -65,4 +85,27 @@ class Exception {
     }
     return false;
   }
+
+//   Future<bool>? channelExists(
+//     String server_name,
+//       String channelName,
+//       Database db3,
+//       StoreRef<String, Map> server_store,
+//       StoreRef<String, Map> channel_store,
+//       User user1) async {
+//     var channel_record1 = await channel_store.find(db3);
+//     for (var rec in channel_record1) {
+
+//         if (rec.key == channelName && rec.value['serverName'] == server_name) {
+
+//           for (var user in rec.value['mememberlist']) {
+//             if (user == user1.username) {
+//               print("User is already in the channel");
+//               return true;
+//             }
+//           }
+//         }
+//   }
+//   return false;
+// }
 }

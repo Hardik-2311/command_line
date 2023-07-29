@@ -13,20 +13,17 @@ class Server extends Exception {
   late ServerType role;
   late List<Map<String, dynamic>> categorylist;
 
-  createServer(Database db2, StoreRef<String, Map> server_store, User user1,
-      var server_record) async {
+  Future? createServer(Database db2, StoreRef<String, Map> server_store,
+      User user1, var server_record) async {
     if (await super.logged_in(user1)) {
       return;
     } else {
       stdout.write("Name of the server -> ");
       final servername = stdin.readLineSync() as String;
       this.name = servername;
-
-      //what if server already exists of this name
       if (await super.server_exist(servername, db2, server_store)) {
         return;
       }
-      //set a password for the mod role
       stdout.write("Type password with which users can access mod role -> ");
       stdin.echoMode = false;
       final String modPassword = stdin.readLineSync() as String;
@@ -48,8 +45,8 @@ class Server extends Exception {
     }
   }
 
-  joinSerever(Database db2, StoreRef<String, Map> server_store, User user1,
-      var server_record) async {
+  Future? joinSerever(Database db2, StoreRef<String, Map> server_store,
+      User user1, var server_record) async {
     if (await super.logged_in(user1)) {
       return;
     } else {
@@ -60,8 +57,9 @@ class Server extends Exception {
       if (await super.no_any_server_exist(servername, db2, server_store)) {
         return;
       }
-      Map<String, dynamic> roleList = await server_store.record(servername).get(db2)
-          as Map<String, dynamic>;
+      Map<String, dynamic> roleList = await server_store
+          .record(servername)
+          .get(db2) as Map<String, dynamic>;
       List b = roleList['mememberlist'];
       for (var use in b) {
         if (use['name'] == user1.username) {
@@ -92,12 +90,12 @@ class Server extends Exception {
           print("Please enter a valid role");
           return;
       }
-      Map aa = {
+      Map cat = {
         'name': user1.username,
         'role': role_type,
       };
-      roleList = cloneMap(roleList); // Create a copy of the map
-      roleList['mememberlist'].add(aa);
+      roleList = cloneMap(roleList);
+      roleList['mememberlist'].add(cat);
       await server_store.record(servername).delete(db2);
       await server_store.record(servername).put(db2, roleList);
       print("User successfully added to the server");

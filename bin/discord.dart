@@ -5,11 +5,14 @@ import 'package:sembast/sembast.dart';
 import 'package:discord/models/storage.dart';
 import 'package:discord/models/user_create.dart';
 import 'package:discord/models/server.dart';
+import 'package:discord/models/channel.dart';
+
 void main() async {
   var storage = Storage.constructor1();
   User new_user = User("0", "0");
   var fun = Admin.fun();
-  var server=Server();
+  var server = Server();
+  var channel = Channel();
 
   List<dynamic> myList = await storage.connection();
   Database db1 = myList[0];
@@ -19,13 +22,16 @@ void main() async {
   Database db5 = myList[4];
   StoreRef<String, String> userStore = myList[5];
   StoreRef<String, Map> server_store = myList[6];
+  StoreRef<String, Map> channel_store = myList[7];
 
-  var server_record = myList[7];
+  var server_record = myList[11];
+  var channel_record = myList[12];
+
 
   bool flag = true;
 
   while (flag) {
-    stdout.write('>>');
+    stdout.write('>> ');
     var input = stdin.readLineSync() as String;
 
     switch (input) {
@@ -35,20 +41,27 @@ void main() async {
 
       case "login":
         await fun.login(db1, userStore, new_user);
+        break;
 
       case "logout":
         await fun.logout(new_user);
+        break;
 
       case "delete":
         await fun.deleteData(db1, userStore, new_user);
+        break;
 
       case "createserver":
-      await server.createServer(db2, server_store, new_user, server_record);
+        await server.createServer(db2, server_store, new_user, server_record);
+        break;
 
       case "joinserver":
-              await server.joinSerever(
-                  db2, server_store, new_user, server_record);
-              break;
+        await server.joinSerever(db2, server_store, new_user, server_record);
+        break;
+
+      case "createChannel":
+        await channel.create_channel(db2, db3, channel_store, server_store, new_user, channel_record, server_record);
+        break;
 
       case "exit":
         flag = false;
@@ -59,7 +72,7 @@ void main() async {
   }
   await db1.close();
   await db2.close();
-  // await db3.close();
+  await db3.close();
   // await db4.close();
   // await db5.close();
 }
