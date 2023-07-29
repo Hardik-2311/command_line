@@ -1,4 +1,6 @@
 {"version":1,"sembast":1}
-{"key":"s1","value":{"channellist":[],"mememberlist":[{"name":"r","role":"admin"}],"modPassword":"$5$rounds=1000$rEHquePH9oHGTiPH$B2ia.YIEP4kC3zIEkLzgHL4rZDLw2pGck5btRgT6VcB"}}
+{"key":"s1","value":{"channellist":[],"mememberlist":[{"name":"h","role":"admin"}],"modPassword":"$5$rounds=1000$9Woy5QfzJ6NCk7gA$iqhzURho4Pw8fcAL/sBEwOuWxkzxS0QczKwwWYUG2W8"}}
 {"key":"s1","deleted":true}
-{"key":"s1","value":{"channellist":["c1"],"mememberlist":[{"name":"r","role":"admin"}],"modPassword":"$5$rounds=1000$rEHquePH9oHGTiPH$B2ia.YIEP4kC3zIEkLzgHL4rZDLw2pGck5btRgT6VcB"}}
+{"key":"s1","value":{"channellist":["c1"],"mememberlist":[{"name":"h","role":"admin"}],"modPassword":"$5$rounds=1000$9Woy5QfzJ6NCk7gA$iqhzURho4Pw8fcAL/sBEwOuWxkzxS0QczKwwWYUG2W8"}}
+{"key":"s1","deleted":true}
+{"key":"s1","value":{"channellist":["c1"],"mememberlist":[{"name":"h","role":"admin"},{"name":"the","role":"mod"}],"modPassword":"$5$rounds=1000$9Woy5QfzJ6NCk7gA$iqhzURho4Pw8fcAL/sBEwOuWxkzxS0QczKwwWYUG2W8"}}

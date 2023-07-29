@@ -34,6 +34,7 @@ class Admin extends Exception {
       Database db1, StoreRef<String, String> userStore, User user1) async {
     if (user1.username != "0") {
       print("already login logout please!");
+      return;
     }
 
     stdout.write("Username -> ");

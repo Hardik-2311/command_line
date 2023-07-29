@@ -96,7 +96,7 @@ class Server extends Exception {
       };
       roleList = cloneMap(roleList);
       roleList['mememberlist'].add(cat);
-      await server_store.record(servername).delete(db2);
+      // await server_store.record(servername).delete(db2);
       await server_store.record(servername).put(db2, roleList);
       print("User successfully added to the server");
     }

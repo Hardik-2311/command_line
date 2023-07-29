@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, unused_local_variable
 
 import 'dart:io';
+import 'package:discord/messages.dart/message.dart';
 import 'package:sembast/sembast.dart';
 import 'package:discord/models/storage.dart';
 import 'package:discord/models/user_create.dart';
@@ -13,6 +14,7 @@ void main() async {
   var fun = Admin.fun();
   var server = Server();
   var channel = Channel();
+  var message1=message();
 
   List<dynamic> myList = await storage.connection();
   Database db1 = myList[0];
@@ -23,9 +25,12 @@ void main() async {
   StoreRef<String, String> userStore = myList[5];
   StoreRef<String, Map> server_store = myList[6];
   StoreRef<String, Map> channel_store = myList[7];
+  StoreRef<Map, Map> message_store= myList[8];
+
 
   var server_record = myList[11];
   var channel_record = myList[12];
+  var message_record=myList[13];
 
 
   bool flag = true;
@@ -62,6 +67,10 @@ void main() async {
       case "createChannel":
         await channel.create_channel(db2, db3, channel_store, server_store, new_user, channel_record, server_record);
         break;
+
+      case "sendDm":
+      await message1.channel_msg(db2, db3, db4, server_store, channel_store, message_store, new_user);
+      break;
 
       case "exit":
         flag = false;
