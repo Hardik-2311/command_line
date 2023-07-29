@@ -26,8 +26,9 @@ void main() async {
   StoreRef<String, Map> server_store = myList[6];
   StoreRef<String, Map> channel_store = myList[7];
   StoreRef<Map, Map> message_store= myList[8];
+  StoreRef<Map,String> p_dm_store=myList[9];
 
-
+ 
   var server_record = myList[11];
   var channel_record = myList[12];
   var message_record=myList[13];
@@ -68,8 +69,12 @@ void main() async {
         await channel.create_channel(db2, db3, channel_store, server_store, new_user, channel_record, server_record);
         break;
 
-      case "sendDm":
+      case "sendmessagetochannel":
       await message1.channel_msg(db2, db3, db4, server_store, channel_store, message_store, new_user);
+      break;
+
+      case "sendDm":
+      await message1.personalDm(db5, db1, p_dm_store, userStore, new_user);
       break;
 
       case "exit":
