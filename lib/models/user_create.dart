@@ -64,8 +64,6 @@ class Admin extends Exception {
       pass = hashPwd(pass);
     }
 
-    //objects of the class
-
     Admin newUser = Admin(username, pass);
 
     await userStore.record(newUser.username).put(db1, newUser.password);
@@ -76,7 +74,6 @@ class Admin extends Exception {
     print("user registered successfully");
   }
 
-  //login function
   Future<void> login(
       Database db1, StoreRef<String, String> userStore, User user1) async {
     stdout.write("Username: ");
@@ -109,32 +106,6 @@ class Admin extends Exception {
       print("logged in");
     } else {
       print("password doesnt matched");
-      return;
-    }
-  }
-
-  logout(User user1) {
-    if (user1.username == "0") {
-      return;
-    } else {
-      user1.username = "0";
-      user1.password = "0";
-      print("logout successfully");
-      return;
-    }
-  }
-
-  deleteData(
-      Database db1, StoreRef<String, String> userStore, User user1) async {
-    stdout.write("Username: ");
-    final username = stdin.readLineSync() as String;
-    await userStore.record(username).delete(db1);
-
-    if (await username == " ") {
-      print(" not a valid usesname ");
-      return;
-    } else {
-      print("user data deleted");
       return;
     }
   }

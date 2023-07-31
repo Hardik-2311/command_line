@@ -1,5 +1,13 @@
 // ignore_for_file: non_constant_identifier_names, unused_local_variable
 
+
+//features in my mind
+//delete server by admin
+//delete channel
+//delete user -->> implemented
+//should implement timestamp at what time the user has sent the message and show the notifications of the message when user logged in 
+//and when user sees it it should be gone 
+
 import 'dart:io';
 import 'package:discord/messages.dart/message.dart';
 import 'package:sembast/sembast.dart';
@@ -7,6 +15,8 @@ import 'package:discord/models/storage.dart';
 import 'package:discord/models/user_create.dart';
 import 'package:discord/models/server.dart';
 import 'package:discord/models/channel.dart';
+import 'package:discord/models/logout.dart';
+import 'package:discord/models/delete.dart';
 
 void main() async {
   var storage = Storage.constructor1();
@@ -15,6 +25,8 @@ void main() async {
   var server = Server();
   var channel = Channel();
   var message1 = message();
+  var Logout=logout(Field.key,Field.value);
+  var delete=Delete(Field.key,Field.value);
 
   List<dynamic> myList = await storage.connection();
   Database db1 = myList[0];
@@ -48,11 +60,11 @@ void main() async {
         break;
 
       case "logout":
-        await fun.logout(new_user);
+        await Logout.logOut(new_user);
         break;
 
       case "delete":
-        await fun.deleteData(db1, userStore, new_user);
+        await delete.deleteData(db1, userStore, new_user);
         break;
 
       case "createserver":
